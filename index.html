@@ -12,57 +12,60 @@
 <title>東京 6天5夜行程</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{font-size:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#f4f4f0;color:#1a1a1a;min-height:100vh;padding-bottom:env(safe-area-inset-bottom)}
-
-.header{background:#fff;text-align:center;padding:20px 16px 16px;border-bottom:1px solid #e8e8e0;position:sticky;top:0;z-index:20}
+body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;background:#f4f4f0;color:#1a1a1a;min-height:100vh;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.header{background:#fff;text-align:center;padding:18px 16px 14px;border-bottom:1px solid #e8e8e0;position:sticky;top:0;z-index:20}
 .header h1{font-size:20px;font-weight:700}
 .header p{font-size:12px;color:#999;margin-top:3px}
-
-.day-tab{display:flex;gap:7px;overflow-x:auto;padding:10px 14px;background:#fff;border-bottom:1px solid #e8e8e0;scrollbar-width:none;position:sticky;top:61px;z-index:19}
+.nav-tabs{display:flex;background:#fff;border-bottom:1px solid #e0e0da;position:sticky;top:57px;z-index:19}
+.nav-tab{flex:1;padding:10px 4px;font-size:13px;font-weight:600;color:#999;border:none;background:none;cursor:pointer;font-family:inherit;border-bottom:2.5px solid transparent;transition:all .15s}
+.nav-tab.active{color:#1D9E75;border-bottom-color:#1D9E75}
+.page{display:none}
+.page.active{display:block}
+.day-tab{display:flex;gap:7px;overflow-x:auto;padding:10px 14px;background:#f4f4f0;scrollbar-width:none}
 .day-tab::-webkit-scrollbar{display:none}
-.tab-btn{flex-shrink:0;padding:7px 16px;border-radius:20px;border:1.5px solid #ddd;font-size:13px;font-weight:600;background:#fff;color:#999;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
+.tab-btn{flex-shrink:0;padding:6px 15px;border-radius:20px;border:1.5px solid #ddd;font-size:13px;font-weight:600;background:#fff;color:#999;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
 .tab-btn.active{background:#1D9E75;border-color:#1D9E75;color:#fff}
-
 .day-panel{display:none;padding:14px}
 .day-panel.active{display:block}
-
 .day-title{font-size:17px;font-weight:700;margin-bottom:3px}
 .day-sub{font-size:12px;color:#999;margin-bottom:16px}
-
 .timeline{position:relative;padding-left:28px}
 .timeline::before{content:'';position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:#e0e0da;border-radius:1px}
-
 .event{position:relative;margin-bottom:12px}
-.dot{position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:#1D9E75;border:2.5px solid #f4f4f0;flex-shrink:0}
-.dot.food{background:#D85A30}
-.dot.transport{background:#378ADD}
-.dot.rest{background:#bbb}
-.dot.shop{background:#7F77DD}
-
+.dot{position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:#1D9E75;border:2.5px solid #f4f4f0}
+.dot.food{background:#D85A30}.dot.transport{background:#378ADD}.dot.rest{background:#bbb}.dot.shop{background:#7F77DD}
 .event-card{background:#fff;border:1px solid #ececea;border-radius:12px;padding:10px 13px}
 .event-card.optional{border-left:3px solid #9FE1CB}
 .event-card.highlight{border-left:3px solid #1D9E75;background:#f7fdf9}
-
-.opt-label,.hl-label{font-size:10px;font-weight:700;margin-bottom:2px}
-.opt-label{color:#0F6E56}
-.hl-label{color:#0F6E56}
-
+.opt-label,.hl-label{font-size:10px;font-weight:700;margin-bottom:2px;color:#0F6E56}
 .event-time{font-size:11px;color:#bbb;font-weight:600;letter-spacing:.3px;margin-bottom:2px}
 .event-name{font-size:14px;font-weight:700;line-height:1.4}
 .event-note{font-size:12px;color:#777;margin-top:4px;line-height:1.55}
-
 .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;margin-top:5px}
-.badge-food{background:#fef0eb;color:#a33d1d}
-.badge-shop{background:#f0effe;color:#3C3489}
-.badge-sight{background:#edf8e8;color:#2e6010}
-.badge-transport{background:#e8f3fd;color:#185FA5}
-
-.note-box{background:#fff;border:1px solid #ececea;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:12px;color:#777;line-height:1.7}
+.badge-food{background:#fef0eb;color:#a33d1d}.badge-shop{background:#f0effe;color:#3C3489}
+.badge-sight{background:#edf8e8;color:#2e6010}.badge-transport{background:#e8f3fd;color:#185FA5}
+.map-btn{display:inline-flex;align-items:center;gap:4px;margin-top:7px;padding:5px 11px;border-radius:8px;background:#e8f3fd;color:#185FA5;font-size:11px;font-weight:700;text-decoration:none}
+.note-box{background:#fff;border:1px solid #ececea;border-radius:12px;padding:12px 14px;margin-top:12px;font-size:12px;color:#777;line-height:1.7}
 .note-box strong{color:#1a1a1a;font-weight:700;display:block;margin-bottom:4px}
 .warn-box{background:#fff5f5;border:1px solid #ffd0d0;border-radius:12px;padding:11px 14px;margin-top:10px;font-size:12px;color:#c00;line-height:1.6;font-weight:600}
-
-.install-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:#1D9E75;color:#fff;padding:12px 16px 12px;padding-bottom:calc(12px + env(safe-area-inset-bottom));font-size:13px;text-align:center;z-index:100;cursor:pointer;font-weight:600}
+/* map page */
+.map-page{padding:14px}
+.map-section{margin-bottom:20px}
+.map-section-title{font-size:13px;font-weight:700;color:#555;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.map-section-title::before{content:'';display:block;width:3px;height:15px;background:#1D9E75;border-radius:2px;flex-shrink:0}
+.place-card{background:#fff;border:1px solid #ececea;border-radius:12px;padding:11px 13px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start}
+.place-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.pd-green{background:#1D9E75}.pd-orange{background:#D85A30}.pd-blue{background:#378ADD}.pd-purple{background:#7F77DD}
+.place-info{flex:1;min-width:0}
+.place-day{font-size:10px;color:#1D9E75;font-weight:700;margin-bottom:3px}
+.place-name{font-size:13px;font-weight:700;line-height:1.4}
+.place-addr{font-size:11px;color:#999;margin-top:3px;line-height:1.5}
+.place-station{font-size:11px;color:#378ADD;margin-top:2px;line-height:1.5}
+.place-actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.action-btn{display:inline-flex;align-items:center;padding:4px 11px;border-radius:7px;font-size:11px;font-weight:700;text-decoration:none}
+.btn-map{background:#e8f3fd;color:#185FA5}
+.btn-navi{background:#edf8e8;color:#2e6010}
+.install-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:#1D9E75;color:#fff;padding:13px 16px;padding-bottom:calc(13px + env(safe-area-inset-bottom));font-size:13px;text-align:center;z-index:100;cursor:pointer;font-weight:600}
 </style>
 </head>
 <body>
@@ -72,172 +75,419 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
   <p>住宿：新橋 ・ 含電車交通規劃</p>
 </div>
 
-<div class="day-tab">
-  <button class="tab-btn active" onclick="show(0)">Day 1</button>
-  <button class="tab-btn" onclick="show(1)">Day 2</button>
-  <button class="tab-btn" onclick="show(2)">Day 3</button>
-  <button class="tab-btn" onclick="show(3)">Day 4</button>
-  <button class="tab-btn" onclick="show(4)">Day 5</button>
-  <button class="tab-btn" onclick="show(5)">Day 6</button>
+<div class="nav-tabs">
+  <button class="nav-tab active" onclick="switchPage('itinerary',this)">📅 行程</button>
+  <button class="nav-tab" onclick="switchPage('maplist',this)">📍 地點總覽</button>
 </div>
 
-<!-- DAY 1 -->
-<div class="day-panel active" id="p0">
-  <div class="day-title">Day 1 ・ 抵達・上野</div>
-  <div class="day-sub">成田機場 → 上野 → 新橋入住</div>
-  <div class="timeline">
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">07:00</div><div class="event-name">成田機場降落</div><div class="event-note">入境、領行李、換錢、購買 Skyliner 車票（建議事先預訂）</div><span class="badge badge-transport">交通</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">08:30 – 09:15</div><div class="event-name">Skyliner → 上野</div><div class="event-note">約41分鐘。行李可寄放上野站投幣置物櫃</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">09:30 – 11:00</div><div class="event-name">山城屋 Yamashiroya</div><div class="event-note">上野站旁，7層樓玩具・模型・角色商品</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">11:00 – 11:30</div><div class="event-name">Mont-bell 上野店</div><div class="event-note">步行約5分鐘，戶外機能服飾</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">11:30 – 12:30</div><div class="event-name">★ Ramen Kamo to Negi</div><div class="event-note">上野御徒町本店，鴨肉蔥拉麵。建議開店前排隊</div><span class="badge badge-food">午餐（指定）</span></div></div>
-    <div class="event"><span class="dot"></span>
-      <div class="event-card optional"><div class="opt-label">▸ 時間允許</div><div class="event-name">上野公園・東照宮</div><div class="event-note">散步約1.5小時，東照宮入場約500円</div><span class="badge badge-sight">景點</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">15:30</div><div class="event-name">取行李 → 新橋辦理入住</div><div class="event-note">上野 → 新橋：JR山手線，約20分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">晚上</div><div class="event-name">新橋居酒屋晚餐</div><div class="event-note">新橋烏森口周邊居酒屋眾多，輕鬆用餐調整時差</div><span class="badge badge-food">晚餐</span></div></div>
+<!-- ══ 行程 PAGE ══ -->
+<div class="page active" id="page-itinerary">
+  <div class="day-tab">
+    <button class="tab-btn active" onclick="show(0)">Day 1</button>
+    <button class="tab-btn" onclick="show(1)">Day 2</button>
+    <button class="tab-btn" onclick="show(2)">Day 3</button>
+    <button class="tab-btn" onclick="show(3)">Day 4</button>
+    <button class="tab-btn" onclick="show(4)">Day 5</button>
+    <button class="tab-btn" onclick="show(5)">Day 6</button>
+  </div>
+
+  <!-- DAY 1 -->
+  <div class="day-panel active" id="p0">
+    <div class="day-title">Day 1 ・ 抵達・上野</div>
+    <div class="day-sub">成田機場 → 上野 → 新橋入住</div>
+    <div class="timeline">
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">07:00</div><div class="event-name">成田機場降落</div><div class="event-note">入境、領行李、換錢、購買 Skyliner 車票（建議事先預訂）</div><span class="badge badge-transport">交通</span></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">08:30 – 09:15</div><div class="event-name">Skyliner → 上野</div><div class="event-note">約41分鐘。行李可寄放上野站投幣置物櫃</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">09:30 – 11:00</div><div class="event-name">山城屋 Yamashiroya</div><div class="event-note">上野站旁，7層樓玩具・模型・角色商品<br>📍 台東区上野4-6-2</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=山城屋+上野" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">11:00 – 11:30</div><div class="event-name">Mont-bell 上野店</div><div class="event-note">步行約5分鐘，戶外機能服飾<br>📍 台東区上野3-19-6</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=モンベル+上野" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">11:30 – 12:30</div><div class="event-name">★ Ramen Kamo to Negi</div><div class="event-note">鴨肉蔥拉麵，建議開店前排隊<br>📍 台東区上野3-13-4</div><span class="badge badge-food">午餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=鴨to葱+上野御徒町本店" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot"></span>
+        <div class="event-card optional"><div class="opt-label">▸ 時間允許</div><div class="event-name">上野公園・東照宮</div><div class="event-note">散步約1.5小時，東照宮入場約500円<br>📍 台東区上野公園9-88</div><span class="badge badge-sight">景點</span>
+        <a class="map-btn" href="https://maps.google.com/?q=上野東照宮" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">15:30</div><div class="event-name">取行李 → 新橋辦理入住</div><div class="event-note">上野→新橋：JR山手線，約20分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">晚上</div><div class="event-name">新橋居酒屋晚餐</div><div class="event-note">新橋烏森口周邊居酒屋眾多，輕鬆用餐調整時差</div><span class="badge badge-food">晚餐</span>
+        <a class="map-btn" href="https://maps.google.com/?q=新橋駅+烏森口" target="_blank">📍 地圖</a></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-panel" id="p1">
+    <div class="day-title">Day 2 ・ 六本木・原宿・表參道</div>
+    <div class="day-sub">Bricolage 早午餐 → 六本木 → 原宿・表參道</div>
+    <div class="timeline">
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">09:00 – 10:30</div><div class="event-name">★ Bricolage bread & co.</div><div class="event-note">天然酵母麵包早午餐。新橋→六本木：都營大江戸線，約10分鐘<br>📍 港区六本木6-15-1 けやき坂テラス1F</div><span class="badge badge-food">早午餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=Bricolage+bread+六本木" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">10:30 – 13:00</div><div class="event-name">六本木逛街</div><div class="event-note">六本木 Hills、東京 Midtown、唐吉訶德<br>📍 港区六本木6-10-1（六本木ヒルズ）</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=六本木ヒルズ" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">13:15</div><div class="event-name">電車前往原宿</div><div class="event-note">六本木→表參道：千代田線，約10分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">13:30 – 15:30</div><div class="event-name">原宿・竹下通り</div><div class="event-note">可愛雜貨、流行服飾<br>📍 渋谷区神宮前1-6 竹下通り</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=竹下通り+原宿" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">15:30 – 18:00</div><div class="event-name">表參道逛街</div><div class="event-note">表參道 Hills、精品・select shop<br>📍 渋谷区神宮前4-12-10 表参道ヒルズ</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=表参道ヒルズ" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">18:15</div><div class="event-name">電車回新橋</div><div class="event-note">表參道→新橋：銀座線，約15分鐘</div><span class="badge badge-transport">電車</span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-panel" id="p2">
+    <div class="day-title">Day 3 ・ 秋葉原・晴空塔・東京車站・銀座</div>
+    <div class="day-sub">蒟蒻しゃぼん採買 ＋ Maruushi Meat 18:30</div>
+    <div class="timeline">
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">10:00</div><div class="event-name">電車前往秋葉原</div><div class="event-note">新橋→秋葉原：JR山手線，約18分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">10:15 – 12:00</div><div class="event-name">秋葉原逛街</div><div class="event-note">Yodobashi Akiba、電器・動漫・模型店<br>📍 千代田区外神田1丁目（秋葉原駅周辺）</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=秋葉原電気街" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">12:00</div><div class="event-name">電車→押上（晴空塔）</div><div class="event-note">秋葉原→押上：地鐵半蔵門線，約12分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">12:15 – 13:15</div><div class="event-name">東京ソラマチ 午餐</div><div class="event-note">Solamachi 內餐廳眾多，邊逛邊選<br>📍 墨田区押上1-1-2 東京ソラマチ</div><span class="badge badge-food">午餐</span>
+        <a class="map-btn" href="https://maps.google.com/?q=東京スカイツリータウン" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card highlight"><div class="hl-label">★ 伴手禮採買</div><div class="event-name">蒟蒻しゃぼん Solamachi 店</div><div class="event-note">東京限定「粋しゃぼん」只有這裡有！<br>📍 東京ソラマチ 4F イーストヤード 9番地<br>　  墨田区押上1-1-2・10:00–21:00</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=蒟蒻しゃぼん+東京ソラマチ" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">14:30</div><div class="event-name">電車→東京車站</div><div class="event-note">押上→東京：半蔵門線・大手町換乘，約15分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">14:45 – 16:45</div><div class="event-name">東京車站周邊散策</div><div class="event-note">Gransta・一番街、丸の内紅磚站舍、KITTE、丸の内仲通り<br>📍 千代田区丸の内1-9-1</div><span class="badge badge-sight">景點＋購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=東京駅+丸の内" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot rest"></span>
+        <div class="event-card"><div class="event-time">17:00 – 18:00</div><div class="event-name">回飯店休息換裝</div><div class="event-note">東京站→新橋：JR山手線，約5分鐘</div></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">18:30</div><div class="event-name">★ Maruushi Meat 銀座</div><div class="event-note">新橋→銀座：銀座線1站 or 步行15分。請提前訂位<br>📍 中央区銀座（請依訂位確認詳細地址）</div><span class="badge badge-food">晚餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=maruushi+meat+銀座" target="_blank">📍 地圖</a></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-panel" id="p3">
+    <div class="day-title">Day 4 ・ 澀谷・阿佐谷・中野</div>
+    <div class="day-sub">Guzman y Gomez 午餐 → 阿佐谷神明宮 → 中野百老匯</div>
+    <div class="timeline">
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">10:00</div><div class="event-name">電車前往澀谷</div><div class="event-note">新橋→澀谷：JR山手線，約23分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">10:15 – 11:45</div><div class="event-name">澀谷逛街</div><div class="event-note">Scramble Square、109、Hikarie、PARCO<br>📍 渋谷区渋谷2-24-12（渋谷スクランブルスクエア）</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=渋谷スクランブルスクエア" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">12:00 – 13:30</div><div class="event-name">★ Guzman y Gomez 澀谷</div><div class="event-note">墨西哥 Burrito・Taco 午餐<br>📍 渋谷区宇田川町15-1 渋谷PARCO B1F</div><span class="badge badge-food">午餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=Guzman+y+Gomez+渋谷PARCO" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">14:00</div><div class="event-name">電車前往阿佐谷</div><div class="event-note">澀谷→阿佐ケ谷：JR中央線（新宿換乘），約30分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot"></span>
+        <div class="event-card"><div class="event-time">14:30 – 15:30</div><div class="event-name">阿佐谷神明宮</div><div class="event-note">女性守護神社，以編織御守聞名<br>📍 杉並区阿佐谷北1-25-5・JR阿佐ケ谷駅 北口 徒歩3分</div><span class="badge badge-sight">景點</span>
+        <a class="map-btn" href="https://maps.google.com/?q=阿佐谷神明宮" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">15:45</div><div class="event-name">電車→中野</div><div class="event-note">阿佐谷→中野：JR中央線，約5分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">16:00 – 18:30</div><div class="event-name">中野百老匯</div><div class="event-note">動漫・模型・同人誌聖地，4層樓<br>📍 中野区中野5-52-15・JR中野駅 北口 徒歩5分</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=中野ブロードウェイ" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">19:00</div><div class="event-name">電車回新橋</div><div class="event-note">中野→東京：JR中央線，轉山手線→新橋，約35分鐘</div><span class="badge badge-transport">電車</span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-panel" id="p4">
+    <div class="day-title">Day 5 ・ 新宿（午餐＋晚餐）</div>
+    <div class="day-sub">牛舌 13:30 ・ 和幸匠庵 伊勢丹新宿 晚餐</div>
+    <div class="timeline">
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">10:30</div><div class="event-name">電車前往新宿</div><div class="event-note">新橋→新宿：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">11:00 – 13:00</div><div class="event-name">新宿逛街</div><div class="event-note">Bic Camera、Yodobashi、Takashimaya Times Square<br>📍 渋谷区千駄ヶ谷5-24-2（タイムズスクエア）</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=新宿タイムズスクエア" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">13:30 – 14:30</div><div class="event-name">★ 牛舌檸檬 新宿總店</div><div class="event-note">牛舌定食，建議提早訂位<br>📍 新宿区新宿3-22-7 新宿サンフラワービル1F</div><span class="badge badge-food">午餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=牛タンレモン+新宿総本店" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">15:00 – 17:30</div><div class="event-name">新宿繼續探索</div><div class="event-note">Tokyu Hands、大久保韓國街，或新宿 Oioi 丸井</div><span class="badge badge-shop">購物</span></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">18:30 – 20:00</div><div class="event-name">★ 和幸匠庵 伊勢丹新宿店</div><div class="event-note">炸豬排名店，請提前訂位<br>📍 新宿区新宿3-14-1 伊勢丹新宿店本館B1F</div><span class="badge badge-food">晚餐（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=和幸匠庵+伊勢丹新宿" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">20:30</div><div class="event-name">電車回新橋</div><div class="event-note">新宿→新橋：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span></div></div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-panel" id="p5">
+    <div class="day-title">Day 6 ・ 銀座・返程</div>
+    <div class="day-sub">班機 19:30 ・ 最晚 15:30 離開飯店</div>
+    <div class="timeline">
+      <div class="event"><span class="dot rest"></span>
+        <div class="event-card"><div class="event-time">上午</div><div class="event-name">退房・行李整理</div><div class="event-note">確認退房，若可保管行李先寄放，輕裝出門</div></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">10:00 – 13:30</div><div class="event-name">★ 銀座 無印良品 旗艦店</div><div class="event-note">6層樓，衣服・文具・食品・家居一次掃<br>📍 中央区銀座3-3-5・銀座線 銀座駅 A13出口 徒歩1分</div><span class="badge badge-shop">購物（指定）</span>
+        <a class="map-btn" href="https://maps.google.com/?q=無印良品+銀座" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot food"></span>
+        <div class="event-card"><div class="event-time">13:30 – 14:30</div><div class="event-name">銀座周邊午餐</div><div class="event-note">就近解決，銀座・有樂町選擇多</div><span class="badge badge-food">午餐</span></div></div>
+      <div class="event"><span class="dot shop"></span>
+        <div class="event-card"><div class="event-time">14:30 – 15:15</div><div class="event-name">最後伴手禮採購</div><div class="event-note">有樂町駅周邊藥妝店、超市補貨</div><span class="badge badge-shop">購物</span>
+        <a class="map-btn" href="https://maps.google.com/?q=有楽町駅" target="_blank">📍 地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">15:30</div><div class="event-name">取行李 → 前往日暮里</div><div class="event-note">新橋→日暮里：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span>
+        <a class="map-btn" href="https://maps.google.com/?q=日暮里駅" target="_blank">📍 日暮里駅地圖</a></div></div>
+      <div class="event"><span class="dot transport"></span>
+        <div class="event-card"><div class="event-time">16:15 – 17:00</div><div class="event-name">Skyliner → 成田機場</div><div class="event-note">日暮里→成田，約41分鐘。請確認搭乘航廈</div><span class="badge badge-transport">Skyliner</span></div></div>
+      <div class="event"><span class="dot rest"></span>
+        <div class="event-card"><div class="event-time">17:00 – 19:30</div><div class="event-name">Check-in・出境・返國</div><div class="event-note">預留 2.5 小時辦理手續，出境後可逛免稅店</div></div></div>
+    </div>
+    <div class="warn-box">⚠️ 班機 19:30，建議 17:00 前抵達成田。請勿晚於 15:30 離開飯店。</div>
+    <div class="note-box" style="margin-top:12px">
+      <strong>📌 訂位提醒</strong>
+      ・Maruushi Meat 銀座 → Day 3 晚 18:30<br>
+      ・牛舌檸檬新宿總店 → 建議提前訂位<br>
+      ・和幸匠庵 伊勢丹新宿店 → 建議提前訂位<br>
+      ・Skyliner → 建議上網預購
+    </div>
   </div>
 </div>
 
-<!-- DAY 2 -->
-<div class="day-panel" id="p1">
-  <div class="day-title">Day 2 ・ 六本木・原宿・表參道</div>
-  <div class="day-sub">Bricolage 早午餐 → 六本木逛街 → 原宿・表參道</div>
-  <div class="timeline">
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">09:00 – 10:30</div><div class="event-name">★ Bricolage bread & co.</div><div class="event-note">六本木，天然酵母麵包早午餐。新橋→六本木：都營大江戸線，約10分鐘。建議開店前抵達</div><span class="badge badge-food">早午餐（指定）</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">10:30 – 13:00</div><div class="event-name">六本木逛街</div><div class="event-note">六本木 Hills、東京 Midtown、唐吉訶德等</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">13:15</div><div class="event-name">電車前往原宿</div><div class="event-note">六本木→表參道：千代田線，約10分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">13:30 – 15:30</div><div class="event-name">原宿・竹下通り</div><div class="event-note">竹下通逛街、可愛雜貨、流行服飾</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">15:30 – 18:00</div><div class="event-name">表參道逛街</div><div class="event-note">表參道 Hills、精品・select shop、Omotesando 散步</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">18:15</div><div class="event-name">電車回新橋</div><div class="event-note">表參道→新橋：銀座線，約15分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">晚上</div><div class="event-name">新橋晚餐</div><div class="event-note">自由選擇，新橋周邊豐富</div><span class="badge badge-food">晚餐</span></div></div>
-  </div>
-</div>
+<!-- ══ 地點總覽 PAGE ══ -->
+<div class="page" id="page-maplist">
+<div class="map-page">
 
-<!-- DAY 3 -->
-<div class="day-panel" id="p2">
-  <div class="day-title">Day 3 ・ 秋葉原・晴空塔・東京車站・銀座</div>
-  <div class="day-sub">蒟蒻しゃぼん採買 ＋ Maruushi Meat 18:30</div>
-  <div class="timeline">
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">10:00</div><div class="event-name">電車前往秋葉原</div><div class="event-note">新橋→秋葉原：JR山手線，約18分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">10:15 – 12:00</div><div class="event-name">秋葉原逛街</div><div class="event-note">Yodobashi Akiba、電器・動漫・模型店</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">12:00</div><div class="event-name">電車→押上（晴空塔）</div><div class="event-note">秋葉原→押上：地鐵半蔵門線，約12分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">12:15 – 13:15</div><div class="event-name">東京ソラマチ 午餐</div><div class="event-note">Solamachi 內餐廳眾多，邊逛邊選</div><span class="badge badge-food">午餐</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card highlight"><div class="hl-label">★ 伴手禮採買</div><div class="event-name">蒟蒻しゃぼん Solamachi 店</div><div class="event-note">東京ソラマチ 4F イーストヤード 9番地・10:00–21:00<br>東京限定「粋しゃぼん」只有這裡有！</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">14:30</div><div class="event-name">電車→東京車站</div><div class="event-note">押上→東京：半蔵門線・大手町換乘，約15分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">14:45 – 16:45</div><div class="event-name">東京車站周邊散策</div><div class="event-note">Gransta・一番街、丸の内紅磚站舍拍照、KITTE、丸の内仲通り散步</div><span class="badge badge-sight">景點＋購物</span></div></div>
-    <div class="event"><span class="dot rest"></span>
-      <div class="event-card"><div class="event-time">17:00 – 18:00</div><div class="event-name">回飯店休息換裝</div><div class="event-note">東京站→新橋：JR山手線，約5分鐘</div></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">18:30</div><div class="event-name">★ Maruushi Meat 銀座</div><div class="event-note">新橋→銀座：步行15分鐘 或 銀座線1站。請提前訂位</div><span class="badge badge-food">晚餐（指定）</span></div></div>
+  <div class="map-section">
+    <div class="map-section-title">🍜 餐廳</div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 1 午餐</div>
+        <div class="place-name">Ramen Kamo to Negi 上野御徒町本店</div>
+        <div class="place-addr">📍 台東区上野3-13-4</div>
+        <div class="place-station">🚃 JR 御徒町駅 徒歩3分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=鴨to葱+上野御徒町本店" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=鴨to葱+上野御徒町本店&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 2 早午餐</div>
+        <div class="place-name">Bricolage bread & co.</div>
+        <div class="place-addr">📍 港区六本木6-15-1 けやき坂テラス1F</div>
+        <div class="place-station">🚃 都營大江戸線 六本木駅 徒歩3分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=Bricolage+bread+六本木" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=Bricolage+bread+六本木&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 3 晚餐 18:30 ⚠️ 需訂位</div>
+        <div class="place-name">Maruushi Meat 銀座</div>
+        <div class="place-addr">📍 中央区銀座（請依訂位確認詳細地址）</div>
+        <div class="place-station">🚃 銀座線 銀座駅すぐ</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=maruushi+meat+銀座" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=maruushi+meat+銀座&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 4 午餐</div>
+        <div class="place-name">Guzman y Gomez 澀谷</div>
+        <div class="place-addr">📍 渋谷区宇田川町15-1 渋谷PARCO B1F</div>
+        <div class="place-station">🚃 JR 渋谷駅 徒歩5分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=Guzman+y+Gomez+渋谷PARCO" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=Guzman+y+Gomez+渋谷PARCO&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 5 午餐 13:30 ⚠️ 需訂位</div>
+        <div class="place-name">牛舌檸檬 新宿總店</div>
+        <div class="place-addr">📍 新宿区新宿3-22-7 新宿サンフラワービル1F</div>
+        <div class="place-station">🚃 JR 新宿駅 東口 徒歩3分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=牛タンレモン+新宿総本店" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=牛タンレモン+新宿総本店&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-orange"></div>
+      <div class="place-info">
+        <div class="place-day">Day 5 晚餐 18:30 ⚠️ 需訂位</div>
+        <div class="place-name">和幸匠庵 伊勢丹新宿店</div>
+        <div class="place-addr">📍 新宿区新宿3-14-1 伊勢丹新宿店本館B1F</div>
+        <div class="place-station">🚃 丸ノ内線 新宿三丁目駅 直結</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=和幸匠庵+伊勢丹新宿" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=和幸匠庵+伊勢丹新宿&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- DAY 4 -->
-<div class="day-panel" id="p3">
-  <div class="day-title">Day 4 ・ 澀谷・阿佐谷・中野</div>
-  <div class="day-sub">Guzman y Gomez 午餐 → 阿佐谷神明宮 → 中野百老匯</div>
-  <div class="timeline">
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">10:00</div><div class="event-name">電車前往澀谷</div><div class="event-note">新橋→澀谷：JR山手線，約23分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">10:15 – 11:45</div><div class="event-name">澀谷逛街</div><div class="event-note">Scramble Square、109、Hikarie，或 PARCO</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">12:00 – 13:30</div><div class="event-name">★ Guzman y Gomez 澀谷</div><div class="event-note">墨西哥 Burrito・Taco 午餐</div><span class="badge badge-food">午餐（指定）</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">14:00</div><div class="event-name">電車前往阿佐谷</div><div class="event-note">澀谷→阿佐ケ谷：JR中央線（新宿換乘），約30分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot"></span>
-      <div class="event-card"><div class="event-time">14:30 – 15:30</div><div class="event-name">阿佐谷神明宮</div><div class="event-note">女性守護神社，以編織御守聞名，環境清幽</div><span class="badge badge-sight">景點</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">15:45</div><div class="event-name">電車→中野</div><div class="event-note">阿佐谷→中野：JR中央線，約5分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">16:00 – 18:30</div><div class="event-name">中野百老匯</div><div class="event-note">動漫・模型・同人誌聖地，4層樓可盡情逛</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">19:00</div><div class="event-name">電車回新橋</div><div class="event-note">中野→東京：JR中央線，轉山手線→新橋，約35分鐘</div><span class="badge badge-transport">電車</span></div></div>
+  <div class="map-section">
+    <div class="map-section-title">🛍 購物</div>
+    <div class="place-card">
+      <div class="place-dot pd-purple"></div>
+      <div class="place-info">
+        <div class="place-day">Day 1</div>
+        <div class="place-name">山城屋 Yamashiroya</div>
+        <div class="place-addr">📍 台東区上野4-6-2</div>
+        <div class="place-station">🚃 JR 上野駅 徒歩2分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=山城屋+上野" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=山城屋+上野&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-purple"></div>
+      <div class="place-info">
+        <div class="place-day">Day 1</div>
+        <div class="place-name">Mont-bell 上野店</div>
+        <div class="place-addr">📍 台東区上野3-19-6</div>
+        <div class="place-station">🚃 JR 上野駅 徒歩3分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=モンベル+上野" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=モンベル+上野&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-green"></div>
+      <div class="place-info">
+        <div class="place-day">Day 3 ★ 東京限定款</div>
+        <div class="place-name">蒟蒻しゃぼん Solamachi 店</div>
+        <div class="place-addr">📍 墨田区押上1-1-2 東京ソラマチ 4F イーストヤード9番地</div>
+        <div class="place-station">🚃 半蔵門線・都営浅草線 押上駅 直結・10:00–21:00</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=蒟蒻しゃぼん+東京ソラマチ" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=東京スカイツリータウン&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-purple"></div>
+      <div class="place-info">
+        <div class="place-day">Day 4</div>
+        <div class="place-name">中野百老匯</div>
+        <div class="place-addr">📍 中野区中野5-52-15</div>
+        <div class="place-station">🚃 JR・東西線 中野駅 北口 徒歩5分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=中野ブロードウェイ" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=中野ブロードウェイ&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-purple"></div>
+      <div class="place-info">
+        <div class="place-day">Day 6</div>
+        <div class="place-name">無印良品 銀座（旗艦店）</div>
+        <div class="place-addr">📍 中央区銀座3-3-5</div>
+        <div class="place-station">🚃 銀座線 銀座駅 A13出口 徒歩1分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=無印良品+銀座" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=無印良品+銀座&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- DAY 5 -->
-<div class="day-panel" id="p4">
-  <div class="day-title">Day 5 ・ 新宿（午餐＋晚餐）</div>
-  <div class="day-sub">牛舌 13:30 ・ 和幸匠庵 伊勢丹新宿 晚餐</div>
-  <div class="timeline">
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">10:30</div><div class="event-name">電車前往新宿</div><div class="event-note">新橋→新宿：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">11:00 – 13:00</div><div class="event-name">新宿逛街</div><div class="event-note">Bic Camera、Yodobashi、Takashimaya Times Square 等</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">13:30 – 14:30</div><div class="event-name">★ 牛舌檸檬 新宿總店</div><div class="event-note">牛舌定食午餐，建議提早訂位或排隊</div><span class="badge badge-food">午餐（指定）</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">15:00 – 17:30</div><div class="event-name">新宿繼續探索</div><div class="event-note">Tokyu Hands、大久保韓國街，或新宿 Oioi 丸井</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">18:30 – 20:00</div><div class="event-name">★ 和幸匠庵 伊勢丹新宿店</div><div class="event-note">伊勢丹新宿館內，炸豬排名店。最後一晚道別晚餐，請提前訂位</div><span class="badge badge-food">晚餐（指定）</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">20:30</div><div class="event-name">電車回新橋</div><div class="event-note">新宿→新橋：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span></div></div>
+  <div class="map-section">
+    <div class="map-section-title">⛩ 景點</div>
+    <div class="place-card">
+      <div class="place-dot pd-green"></div>
+      <div class="place-info">
+        <div class="place-day">Day 1（可選）</div>
+        <div class="place-name">上野東照宮・上野公園</div>
+        <div class="place-addr">📍 台東区上野公園9-88</div>
+        <div class="place-station">🚃 JR 上野駅 公園口 徒歩5分・入場約500円</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=上野東照宮" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=上野東照宮&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-green"></div>
+      <div class="place-info">
+        <div class="place-day">Day 3</div>
+        <div class="place-name">東京スカイツリー・ソラマチ</div>
+        <div class="place-addr">📍 墨田区押上1-1-2</div>
+        <div class="place-station">🚃 半蔵門線・都営浅草線 押上駅 直結</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=東京スカイツリー" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=東京スカイツリー&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-green"></div>
+      <div class="place-info">
+        <div class="place-day">Day 4</div>
+        <div class="place-name">阿佐谷神明宮</div>
+        <div class="place-addr">📍 杉並区阿佐谷北1-25-5</div>
+        <div class="place-station">🚃 JR中央線 阿佐ケ谷駅 北口 徒歩3分</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=阿佐谷神明宮" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=阿佐谷神明宮&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- DAY 6 -->
-<div class="day-panel" id="p5">
-  <div class="day-title">Day 6 ・ 銀座・返程</div>
-  <div class="day-sub">班機 19:30 ・ 最晚 15:30 離開飯店</div>
-  <div class="timeline">
-    <div class="event"><span class="dot rest"></span>
-      <div class="event-card"><div class="event-time">上午</div><div class="event-name">退房・行李整理</div><div class="event-note">確認退房，若可保管行李先寄放，輕裝出門</div></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">10:00 – 13:30</div><div class="event-name">★ 銀座 無印良品 旗艦店</div><div class="event-note">新橋→銀座：步行15分鐘 或 銀座線1站。6層樓，衣服・文具・食品・家居一次掃</div><span class="badge badge-shop">購物（指定）</span></div></div>
-    <div class="event"><span class="dot food"></span>
-      <div class="event-card"><div class="event-time">13:30 – 14:30</div><div class="event-name">銀座周邊午餐</div><div class="event-note">就近解決，銀座・有樂町選擇多</div><span class="badge badge-food">午餐</span></div></div>
-    <div class="event"><span class="dot shop"></span>
-      <div class="event-card"><div class="event-time">14:30 – 15:15</div><div class="event-name">最後伴手禮採購</div><div class="event-note">有樂町駅周邊藥妝店、超市補貨</div><span class="badge badge-shop">購物</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">15:30</div><div class="event-name">取行李 → 前往日暮里</div><div class="event-note">新橋→日暮里：JR山手線，約25分鐘</div><span class="badge badge-transport">電車</span></div></div>
-    <div class="event"><span class="dot transport"></span>
-      <div class="event-card"><div class="event-time">16:15 – 17:00</div><div class="event-name">Skyliner → 成田機場</div><div class="event-note">日暮里→成田，約41分鐘。請確認搭乘航廈</div><span class="badge badge-transport">Skyliner</span></div></div>
-    <div class="event"><span class="dot rest"></span>
-      <div class="event-card"><div class="event-time">17:00 – 19:30</div><div class="event-name">Check-in・出境・返國</div><div class="event-note">預留 2.5 小時辦理手續，出境後可逛免稅店</div></div></div>
+  <div class="map-section">
+    <div class="map-section-title">🏠 住宿・交通</div>
+    <div class="place-card">
+      <div class="place-dot pd-blue"></div>
+      <div class="place-info">
+        <div class="place-day">全程住宿基地</div>
+        <div class="place-name">新橋駅</div>
+        <div class="place-addr">📍 港区新橋2-17-1</div>
+        <div class="place-station">🚃 JR山手線・銀座線・都営浅草線・ゆりかもめ</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=新橋駅" target="_blank">地圖</a>
+        </div>
+      </div>
+    </div>
+    <div class="place-card">
+      <div class="place-dot pd-blue"></div>
+      <div class="place-info">
+        <div class="place-day">Day 6 返程 ⚠️ 最晚 15:30 出發</div>
+        <div class="place-name">日暮里駅（Skyliner 搭乘站）</div>
+        <div class="place-addr">📍 荒川区西日暮里2-1-1</div>
+        <div class="place-station">🚃 JR山手線・京成本線 日暮里駅</div>
+        <div class="place-actions">
+          <a class="action-btn btn-map" href="https://maps.google.com/?q=日暮里駅" target="_blank">地圖</a>
+          <a class="action-btn btn-navi" href="https://maps.google.com/?daddr=日暮里駅&directionsmode=transit" target="_blank">導航</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="warn-box">⚠️ 班機 19:30，建議 17:00 前抵達成田。Skyliner 約41分 + 新橋→日暮里25分，請勿晚於 15:30 離開飯店。</div>
-</div>
 
-<div style="padding:0 14px 24px">
-  <div class="note-box">
-    <strong>📌 訂位提醒</strong>
-    ・Maruushi Meat 銀座 → Day 3 晚 18:30<br>
-    ・牛舌檸檬新宿總店 → 建議提前訂位<br>
-    ・和幸匠庵 伊勢丹新宿店 → 建議提前訂位<br>
-    ・Skyliner → 建議上網預購
-  </div>
-  <div class="note-box" style="margin-top:10px">
-    <strong>🧴 蒟蒻しゃぼん</strong>
-    Solamachi 4F イーストヤード 9番地・10:00–21:00<br>
-    東京限定「粋しゃぼん」只有這裡有！
-  </div>
-  <div class="note-box" style="margin-top:10px">
-    <strong>🚃 交通小提醒</strong>
-    ・建議購買 Suica 或 Pasmo 儲值卡<br>
-    ・山手線環繞市區，新橋為重要樞紐站
-  </div>
+</div>
 </div>
 
 <div class="install-banner" id="installBanner" onclick="installPWA()">
@@ -245,31 +495,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-se
 </div>
 
 <script>
+function switchPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function show(i){
   document.querySelectorAll('.day-panel').forEach((p,j)=>p.classList.toggle('active',j===i));
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt',(e)=>{
-  e.preventDefault();
-  deferredPrompt=e;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();deferredPrompt=e;
   document.getElementById('installBanner').style.display='block';
 });
 function installPWA(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(()=>{
-      deferredPrompt=null;
-      document.getElementById('installBanner').style.display='none';
-    });
-  }
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('installBanner').style.display='none';});}
 }
-
-if('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js');
-}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
 </html>
